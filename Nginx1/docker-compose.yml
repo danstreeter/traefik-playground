@@ -1,0 +1,15 @@
+version: "3.2"
+services:
+  traefik:
+    image: nginx
+    networks:
+      - tbridge
+    labels:
+      - "traefik.backend=nginx1"
+      - "traefik.frontend.rule=Host:some.random.domain.is.here.nginx1.localdev"
+      - "traefik.port=80"
+
+networks:
+  tbridge:
+    external:
+      name: traefik_exposed_bridge

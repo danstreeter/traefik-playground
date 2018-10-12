@@ -1,0 +1,17 @@
+version: "3.2"
+services:
+  traefik:
+    image: traefik
+    networks:
+      - exposed_bridge
+    ports:
+      - 80:80
+      # - 443:443
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/traefik.toml
+    command: -c /traefik.toml --web --docker --logLevel=INFO
+
+networks:
+  exposed_bridge:
